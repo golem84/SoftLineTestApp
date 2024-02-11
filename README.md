@@ -8,10 +8,11 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/golem84/SoftLineTestApp)
 ![GitHub issues](https://img.shields.io/github/issues/golem84/SoftLineTestApp)
 
-## Детали
+## Детали (стадии разработки)
 Проект разработан на версии .NET 6.  
 Реализованы базовые классы для сохранения в БД.  
 В приложении DB Borwser создана база данных SqLite "TestAppDB.db", заполнена тестовыми данными.  
+Добавлен тест соединения к БД на базе xUnit.  
 
 ## Контакты
 https://t.me/golem84
