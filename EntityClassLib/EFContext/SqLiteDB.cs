@@ -21,7 +21,12 @@ namespace ClassLib.EFContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=C:\\Projects\\SoftLineTestApp\\TestAppDB.db");
+            /// <summary>
+            /// TODO: поправить путь к файлу БД
+            /// </summary>
+            string path=@"D:\MyGitProjects\SoftLineTestApp\";
+            string fname = "TestAppDB.db";
+            optionsBuilder.UseSqlite("Filename="+path+fname);
         }
     }
 }

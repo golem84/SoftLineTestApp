@@ -12,5 +12,6 @@ namespace ClassLib.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public int StatusId { get; set; }
+        public MyStatus Status { get; set; }
     }
 }

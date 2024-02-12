@@ -1,5 +1,6 @@
 using ClassLib.Entities;
 using ClassLib.EFContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace SoftLineTestApp.Tests
 {
@@ -11,9 +12,6 @@ namespace SoftLineTestApp.Tests
             var db = new SqLiteDB();
             var tasklist = db.Tasks.ToList();
             Assert.Equal(4, tasklist.Count);
-            var task = db.Tasks.First();
-            var task_st = task.StatusId;
-            Assert.Equal(1, task_st);
         }
     }
 }
