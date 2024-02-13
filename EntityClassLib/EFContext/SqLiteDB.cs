@@ -14,7 +14,7 @@ namespace ClassLib.EFContext
         public DbSet<MyTask> Tasks { get; set; }
         public DbSet<MyStatus> Statuses { get; set; }
 
-        public SqLiteDB()
+        public SqLiteDB(DbContextOptions<SqLiteDB> options): base(options)
         {
             Database.EnsureCreated();
         }

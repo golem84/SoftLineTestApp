@@ -13,5 +13,14 @@ namespace ClassLib.Entities
         public string Description { get; set; }
         public int StatusId { get; set; }
         public MyStatus Status { get; set; }
+
+        /*
+        public MyTask (string name, string desc)
+        {
+            Name = name;
+            Description = desc;
+            StatusId = 1;
+        }
+        */
     }
 }
