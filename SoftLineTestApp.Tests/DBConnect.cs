@@ -1,6 +1,4 @@
-using ClassLib.Entities;
 using ClassLib.EFContext;
-using Microsoft.EntityFrameworkCore;
 
 namespace SoftLineTestApp.Tests
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
+﻿using Microsoft.EntityFrameworkCore;
 using ClassLib.Entities;
 
 namespace ClassLib.EFContext
@@ -16,6 +10,10 @@ namespace ClassLib.EFContext
 
         public SqLiteDB(DbContextOptions<SqLiteDB> options): base(options)
         {
+            Database.EnsureCreated();
+        }
+
+        public SqLiteDB(){
             Database.EnsureCreated();
         }
 

@@ -1,6 +1,3 @@
-using System.Data.Common;
-
-
 namespace ClassLib.Entities;
 public class MyTaskDTO
 {

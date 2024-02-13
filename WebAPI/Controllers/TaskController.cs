@@ -15,17 +15,9 @@ public class TaskController: ControllerBase
     public TaskController(SqLiteDB context)
     {
         db = context;
-        /*
-        // если нет данных
-        if (!db.Tasks.Any())
-        {
-            db.Tasks.Add(new Task { Name = "New Task1", Description = "NewTask1_Description" });
-            db.Tasks.Add(new Task { Name = "New Task2", Description = "NewTask2_Description" });
-            db.SaveChanges();
-        }
-        */
     }
 
+    // GET /Task
     [HttpGet]
     public IEnumerable<MyTaskDTO> Get()
     {
@@ -40,7 +32,7 @@ public class TaskController: ControllerBase
         return tasks.ToList();
     }
 
-    // GET api/tasks/5
+    // GET /Task/<id>
     [HttpGet("{id}")]
     public MyTaskDTO Get(int id)
     {
@@ -62,64 +54,63 @@ public class TaskController: ControllerBase
         return td;
     }
 
-    // POST api/tasks
-        [HttpPost]
-        public string Post(MyTaskDTO td)
+    // POST Task
+    [HttpPost]
+    public string Post(MyTaskDTO td)
+    {
+        if (td == null)
         {
-            if (td == null)
-            {
-                return $"Task '{td.Name}' added!";
-            } 
-            Dictionary<string, int> statuses = db.Statuses.ToDictionary(s => s.Status, s=> s.Id);
-            MyTask task = new MyTask {
-                Name = td.Name,
-                Description = td.Description,
-                StatusId = statuses[td.Status]
-            };
-
-            db.Tasks.Add(task);
-            db.SaveChanges();
             return $"Task '{td.Name}' added!";
-        }
+        } 
+        Dictionary<string, int> statuses = db.Statuses.ToDictionary(s => s.Status, s=> s.Id);
+        MyTask task = new MyTask {
+            Name = td.Name,
+            Description = td.Description,
+            StatusId = statuses[td.Status]
+        };
 
-        // PUT api/tasks/
-        [HttpPut]
-        public string Put(MyTaskDTO td)
+        db.Tasks.Add(task);
+        db.SaveChanges();
+        return $"Task '{td.Name}' added!";
+    }
+
+    // PUT Task/
+    [HttpPut]
+    public string Put(MyTaskDTO td)
+    {
+        if (td == null)
         {
-            if (td == null)
-            {
-                return "ERROR: Empty object!";
-            }           
+            return "ERROR: Empty object!";
+        }           
             
-            if (!db.Tasks.Any(x => x.Id == td.Id))
-            {
-                return "ERROR: No such task found!";
-            }
-
-            Dictionary<string, int> statuses = db.Statuses.ToDictionary(s => s.Status, s=> s.Id);
-            MyTask task = new MyTask {
-                Name = td.Name,
-                Description = td.Description,
-                StatusId = statuses[td.Status]
-            };
-
-            db.Update(task);
-            db.SaveChangesAsync();
-            return $"Task '{td.Name}' updated";
-        }
-        // DELETE api/tasks/5
-        [HttpDelete("{id}")]
-        public string Delete(int id)
+        if (!db.Tasks.Any(x => x.Id == td.Id))
         {
-            MyTask task = db.Tasks.FirstOrDefault(x => x.Id == id);
-            if (task == null)
-            {
-                return $"No task with id={id} found...";
-            }
-            db.Tasks.Remove(task);
-            db.SaveChangesAsync();
-            return $"Task delete success.";
+            return "ERROR: No such task found!";
         }
 
+        Dictionary<string, int> statuses = db.Statuses.ToDictionary(s => s.Status, s=> s.Id);
+        MyTask task = new MyTask {
+            Name = td.Name,
+            Description = td.Description,
+            StatusId = statuses[td.Status]
+        };
 
+        db.Update(task);
+        db.SaveChangesAsync();
+        return $"Task '{td.Name}' updated";
+    }
+        
+    // DELETE Task/<id>
+    [HttpDelete("{id}")]
+    public string Delete(int id)
+    {
+        MyTask task = db.Tasks.FirstOrDefault(x => x.Id == id);
+        if (task == null)
+        {
+            return $"No task with id={id} found...";
+        }
+        db.Tasks.Remove(task);
+        db.SaveChangesAsync();
+        return $"Task delete success.";
+    }
 }
