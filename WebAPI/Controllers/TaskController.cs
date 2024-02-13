@@ -60,7 +60,7 @@ public class TaskController: ControllerBase
     {
         if (td == null)
         {
-            return $"Task '{td.Name}' added!";
+            return $"ERROR: empty object!";
         } 
         Dictionary<string, int> statuses = db.Statuses.ToDictionary(s => s.Status, s=> s.Id);
         MyTask task = new MyTask {
@@ -89,6 +89,9 @@ public class TaskController: ControllerBase
         }
 
         Dictionary<string, int> statuses = db.Statuses.ToDictionary(s => s.Status, s=> s.Id);
+        if (!statuses.TryGetValue(td.Status, out int key)){
+            return $"Status '{td.Status}' not found";
+        }
         MyTask task = new MyTask {
             Name = td.Name,
             Description = td.Description,
